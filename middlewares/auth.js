@@ -14,7 +14,7 @@ exports.authMiddleware = {
         if (!friendRow) {
             throw new Error("not allowed");
         }
-        req.user = friendRow;
+        req.user = friendRow[0];
     
         next();
     }
