@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 8081;
 const vacationData = require('./data/vacation.json'); 
 const { friendsRouter } = require('./routers/friendsRouter.js');
+const { postRouter } = require('./routers/postRouter.js');
 
 app.use((req, res, next) => {
     res.set({
@@ -21,6 +22,7 @@ app.get ("/vacation",(req,res)=> {
     res.json(vacationData);
 });
 app.use('/api/friends',friendsRouter);
+app.use('/api/post',postRouter);
 app.listen(port,() => {
     console.log(`listening on port ${port}`);
 });
