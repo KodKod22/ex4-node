@@ -1,0 +1,55 @@
+{
+    "category": "destinations",
+    "locations":[
+        {
+            "id":"1",
+            "locationName":"Berlin",
+            "type":"City Break"
+        },
+        {
+            "id":"2",
+            "locationName":"London",
+            "type":"Cultural Exploration"
+        },
+        {
+            "id":"3",
+            "locationName":"Hawaii",
+            "type":"Beach Vacation"
+        },
+        {
+            "id":"4",
+            "locationName":"Thailand",
+            "type":"Adventure Travel"
+        },
+        {
+            "id":"5",
+            "locationName":"Amsterdam",
+            "type":"Romantic Getaway"
+        },
+        {
+            "id":"6",
+            "locationName":"Paris",
+            "type":"Cultural Exploration"
+        },
+        {
+            "id":"7",
+            "locationName":"Rome",
+            "type":"Cultural Exploration"
+        },
+        {
+            "id":"8",
+            "locationName":"Rumania",
+            "type":"Cultural Exploration"
+        },
+        {
+            "id":"9",
+            "locationName":"Czech Republic",
+            "type":"Cultural Exploration"
+        },
+        {
+            "id":"10",
+            "locationName":"Tel-Aviv Jaffa",
+            "type":"Beach Vacation"
+        }
+    ]
+}
