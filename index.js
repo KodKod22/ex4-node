@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8081;
-const vacationData = require('./data/vacation.json');
+const vacationData = require('./data/vacation.json'); 
 const { friendsRouter } = require('./routers/friendsRouter.js');
 
 app.use((req, res, next) => {
@@ -15,7 +15,11 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
+app.get ("/vacation",(req,res)=> {
+    res.json(vacationData);
+});
 app.use('/api/friends',friendsRouter);
 app.listen(port,() => {
     console.log(`listening on port ${port}`);
