@@ -11,11 +11,11 @@ exports.authMiddleware = {
 
         const [friendRow] = await connection.execute(`SELECT *  FROM  tbl_55_friends as user where user.friend_access_key = '${req.body.friend_access_key}'`);
         connection.end();
-        if (!friendRow) {
+        if (friendRow[0] != token) {
             throw new Error("not allowed");
         }
-        req.user = friendRow[0];
-    
+        
+        req.user = friendRow[0];    
         next();
     }
 }
