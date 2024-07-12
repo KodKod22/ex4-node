@@ -22,5 +22,15 @@ exports.postsController = {
 
         connection.end()
         res.send(true);
+    },
+    async getPost(req,res) {
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+
+        const [rows]= await connection.execute(`SELECT * FROM tbl_55_post`);
+        res.json(rows);
+        connection.end()
+        
+        return rows;   
     }
 }
