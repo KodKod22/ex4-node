@@ -11,7 +11,6 @@ exports.postsController = {
         connection.end()
         res.send(true);
     },
-    
     async updatePost(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
@@ -32,5 +31,31 @@ exports.postsController = {
         connection.end()
         
         return rows;   
+    },
+    async calculateTripsResult(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+
+        const [tripTypeRow] = await connection.execute(`SELECT tripType, count(*) AS namesCount FROM tbl_55_post GROUP BY tripType ORDER BY namesCount DESC LIMIT 1;`);
+        const tripType = tripTypeRow[0].tripType;
+
+        const [destinationRow] =  await connection.execute(`SELECT destination, count(*) AS namesCount FROM tbl_55_post group by destination ORDER BY namesCount DESC LIMIT 1;`);
+        const destination = destinationRow[0].destination;
+        
+        const [beginigRow] =  await connection.execute(`SELECT beginig, count(*) AS namesCount FROM tbl_55_post group by beginig ORDER BY namesCount DESC limit 1;`);
+        const beginig = beginigRow[0].beginig;
+
+        const [endRow] =  await connection.execute(`SELECT end, count(*) AS namesCount FROM tbl_55_post group by end ORDER BY namesCount DESC limit 1;`);
+        const end = endRow[0].end;
+
+        res.json({
+            tripType,
+            destination,
+            beginig,
+            end,
+            differenceInDays
+        });
+        connection.end();
+        
     }
 }
