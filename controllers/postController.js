@@ -36,6 +36,11 @@ exports.postsController = {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
 
+        const [rowsCount] = await connection.execute(`SELECT COUNT(*) AS namesCount FROM tbl_55_post;`);
+        if (rowsCount[0].namesCount < 5) {
+            throw new Error("no everyone enter there trip preference");
+        }
+
         const [tripTypeRow] = await connection.execute(`SELECT tripType, count(*) AS namesCount FROM tbl_55_post GROUP BY tripType ORDER BY namesCount DESC LIMIT 1;`);
         const tripType = tripTypeRow[0].tripType;
 
@@ -53,7 +58,6 @@ exports.postsController = {
             destination,
             beginig,
             end,
-            differenceInDays
         });
         connection.end();
         
