@@ -2,7 +2,7 @@
 exports.friendsController = {
     async addFriend(req,res){
         const token = crypto.randomUUID();
-        const {dbConnection} = require('../dbConnection');
+        const {dbConnection} = require('../dbConnection.JS');
         const connection = await dbConnection.createConnection();
         if (!req.body.friend_name || !req.body.friend_password) {
             return res.status(400).send("Input is null");

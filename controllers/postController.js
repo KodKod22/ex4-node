@@ -38,7 +38,7 @@ exports.postsController = {
 
         const [rowsCount] = await connection.execute(`SELECT COUNT(*) AS namesCount FROM tbl_55_post;`);
         if (rowsCount[0].namesCount < 5) {
-            throw new Error("no everyone enter there trip preference");
+            throw new Error("not everyone enter there trip preference");
         }
 
         const [tripTypeRow] = await connection.execute(`SELECT tripType, count(*) AS namesCount FROM tbl_55_post GROUP BY tripType ORDER BY namesCount DESC LIMIT 1;`);
@@ -48,10 +48,12 @@ exports.postsController = {
         const destination = destinationRow[0].destination;
         
         const [beginigRow] =  await connection.execute(`SELECT beginig, count(*) AS namesCount FROM tbl_55_post group by beginig ORDER BY namesCount DESC limit 1;`);
-        const beginig = beginigRow[0].beginig;
 
         const [endRow] =  await connection.execute(`SELECT end, count(*) AS namesCount FROM tbl_55_post group by end ORDER BY namesCount DESC limit 1;`);
-        const end = endRow[0].end;
+
+        const beginig = new Date(beginigRow[0].beginig).toISOString().slice(0, 19).replace('T', ' ');
+        const end = new Date(endRow[0].end).toISOString().slice(0, 19).replace('T', ' ');
+
 
         res.json({
             tripType,
@@ -59,7 +61,6 @@ exports.postsController = {
             beginig,
             end,
         });
-        connection.end();
-        
+        connection.end();       
     }
 }
